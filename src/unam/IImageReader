@@ -1,0 +1,6 @@
+package unam;
+
+public interface IImageReader
+{
+    public BufferedImage ReadImage(string fileSource);
+}
