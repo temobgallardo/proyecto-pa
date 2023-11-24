@@ -58,7 +58,7 @@ public class FileReader_Test {
         HashMap<String, Double> csv = null;
 
         try {
-            csv = sut.csvToDictionary(sourcePath);
+            csv = sut.csvToHashMap(sourcePath);
         } catch (Exception e) {
 
         }
