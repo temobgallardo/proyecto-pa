@@ -24,7 +24,7 @@ public class FilReader implements IFileReader {
     }
 
     @Override
-    public HashMap<String, Double> csvToDictionary(String source) throws IOException {
+    public HashMap<String, Double> csvToHashMap(String source) throws IOException {
         String data = readCsv(source);
 
         String[] csvRows = data.split(NEW_LINE);
@@ -39,4 +39,11 @@ public class FilReader implements IFileReader {
         return dataDic;
     }
 
+    public String[] getRows(String source) throws IOException {
+        String data = readCsv(source);
+
+        String[] csvRows = data.split(NEW_LINE);
+
+        return csvRows;
+    }
 }
