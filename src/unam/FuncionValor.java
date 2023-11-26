@@ -1,21 +1,27 @@
-package unam.utils;
+package unam;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
-import javax.imageio.ImageIO;
-import java.io.File;
+
+import unam.model.FuncionValorModel;
+
 import java.io.IOException;
 import java.awt.Rectangle;
 
-public class FuncionValor2 {
-    private String nombre;
-    private double peso;
-    private String filePath;
+public class FuncionValor {
     private int renglones;
     private int columnas;
     private Rectangle extension;
     private Raster raster;
-    private BufferedImage c_raster;
+    private BufferedImage image;
+    private FuncionValorModel row;
+    private IImageReaderService imageReaderService;
+
+    public FuncionValor(FuncionValorModel rFuncionValorModel, ImageReaderService imageReaderService) {
+        row = rFuncionValorModel;
+        this.imageReaderService = imageReaderService;
+        initialize();
+    }
 
     public int getRenglones() {
         return renglones;
@@ -23,21 +29,6 @@ public class FuncionValor2 {
 
     public int getColumnas() {
         return columnas;
-    }
-
-    public FuncionValor2(String nombre, double w, String rPath) {
-        this.nombre = nombre;
-        this.peso = w;
-        this.filePath = rPath;
-        abrirRaster(this.filePath);
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public double getPeso() {
-        return peso;
     }
 
     public Raster getRaster() {
@@ -48,23 +39,20 @@ public class FuncionValor2 {
         return extension;
     }
 
-    private void abrirRaster(String rPath) {
+    private void initialize() {
         try {
-            this.c_raster = ImageIO.read(new File(rPath));
-            this.raster = this.c_raster.getData();
+            this.image = imageReaderService.readImage(row.getRuta());
+            this.raster = this.image.getData();
 
             this.renglones = this.raster.getHeight();
             this.columnas = this.raster.getWidth();
             this.extension = this.raster.getBounds();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public float getPixel(int x, int y) {
-
         return this.raster.getSampleFloat(x, y, 0);
     }
 

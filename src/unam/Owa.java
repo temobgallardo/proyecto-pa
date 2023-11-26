@@ -1,25 +1,17 @@
 package unam;
 
-public class Owa implements IOwa {
-    // TODO: what is thise for?
-    public double[] valores;
-    public double[] pesos;
-    public double alpha;
-
-    /* Constructor de la clase Owa */
-    public Owa(double[] v, double[] w, double al) {
-        valores = v;
-        pesos = w;
-        alpha = al;
+public final class Owa {
+    public static double valorPixel(double[] valores, double[] pesos, double alpha) {
+        sort(valores, pesos);
+        double owaOnCurrentPixel = computeOnCurrentPixel(valores, pesos, alpha);
+        return owaOnCurrentPixel;
     }
 
-    /* Calculo de Owa para un pixel */
-    public double valorPixel() {
+    private static void sort(double[] valores, double[] pesos) {
         /*
          * Utilizamos Bubble sort para ordenar los valores y
          * los pesos respecto a los valores
          */
-
         double temporal_val = 0.0;
         double temporal_pes = 0.0;
 
@@ -45,7 +37,9 @@ public class Owa implements IOwa {
                 }
             }
         }
+    }
 
+    private static double computeOnCurrentPixel(double[] valores, double[] pesos, double alpha) {
         /*
          * Calculamos las sumas para obtener el owa del Pixel
          * actual
@@ -77,5 +71,4 @@ public class Owa implements IOwa {
         }
         return owa_f;
     }
-
 }
