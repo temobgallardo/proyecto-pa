@@ -37,7 +37,7 @@ public class FileReader_Test {
         try {
             csv = sut.readCsv(sourcePath);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
         Assert.assertNotNull(csv);
@@ -79,6 +79,6 @@ public class FileReader_Test {
         }
 
         Assert.assertNotNull(actualResult);
-        Assert.assertTrue(actualResult.length == 10);
+        Assert.assertTrue(actualResult.length == 11);
     }
 }

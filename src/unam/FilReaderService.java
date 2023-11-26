@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 public class FilReaderService implements IFileReaderService {
     public static String NEW_LINE = "\r\n";
@@ -44,6 +45,15 @@ public class FilReaderService implements IFileReaderService {
 
         String[] csvRows = data.split(NEW_LINE);
 
-        return csvRows;
+        return getSubArray(csvRows);
+    }
+
+    private String[] getSubArray(String[] array) {
+        List<String> subList = List.of();
+
+        for (int i = 1; i < array.length; i++)
+            subList.add(array[i]);
+
+        return (String[]) subList.toArray();
     }
 }

@@ -1,6 +1,5 @@
 package tests;
 
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -11,7 +10,7 @@ import unam.FilReaderService;
 import unam.IFileReaderService;
 import unam.IImageReaderService;
 import unam.ImageReaderService;
-import unam.model.FuncionValor;
+import unam.model.CsvHolder;
 
 public class ImageReader_Test {
     @Test
@@ -19,7 +18,7 @@ public class ImageReader_Test {
         IImageReaderService suv = new ImageReaderService();
 
         try {
-            java.util.List<FuncionValor> funcionValores = setFuncionDeValores();
+            java.util.List<CsvHolder> funcionValores = setFuncionDeValores();
             BufferedImage image = suv.readImage(funcionValores.get(0).getRuta());
             Assert.assertNotNull(image);
         } catch (Exception e) {
@@ -27,14 +26,21 @@ public class ImageReader_Test {
         }
     }
 
-    private java.util.List<FuncionValor> setFuncionDeValores() throws IOException {
+    @Test
+    public void readImage_throw_exception_wrong_path() {
+        IImageReaderService suv = new ImageReaderService();
+
+        Assert.assertThrows(IOException.class, () -> suv.readImage(""));
+    }
+
+    private java.util.List<CsvHolder> setFuncionDeValores() throws IOException {
         IFileReaderService fr = new FilReaderService();
-        var datosCsv = fr.getRows("porciono_avicola.csv");
-        java.util.List<FuncionValor> funcionValores = java.util.List.of();
+        String[] datosCsv = fr.getRows("porcino_avicola.csv");
+        java.util.List<CsvHolder> funcionValores = java.util.List.of();
 
         for (String lineaCsv : datosCsv) {
             var row = lineaCsv.split(",");
-            funcionValores.add(new FuncionValor(row[0], Double.parseDouble(row[1]), row[2]));
+            funcionValores.add(new CsvHolder(row[0], Double.parseDouble(row[1]), row[2]));
         }
 
         return funcionValores;

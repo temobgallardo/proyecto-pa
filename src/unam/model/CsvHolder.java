@@ -1,11 +1,11 @@
 package unam.model;
 
-public class FuncionValor {
+public class CsvHolder {
     String nombre;
     Double peso;
     String ruta;
 
-    public FuncionValor(String nombre, Double peso, String ruta) {
+    public CsvHolder(String nombre, Double peso, String ruta) {
         this.nombre = nombre;
         this.peso = peso;
         this.ruta = ruta;
