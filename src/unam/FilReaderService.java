@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,11 +50,11 @@ public class FilReaderService implements IFileReaderService {
     }
 
     private String[] getSubArray(String[] array) {
-        List<String> subList = List.of();
+        List<String> subList = new ArrayList<>();
 
         for (int i = 1; i < array.length; i++)
             subList.add(array[i]);
 
-        return (String[]) subList.toArray();
+        return subList.toArray(new String[0]);
     }
 }
