@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package unam;
 
 import java.awt.image.BufferedImage;
@@ -10,25 +6,19 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author victor
- */
 public class App {
 
-    public static String pDir = "C:\\source\\programacion avanzada\\MediaPonderadaOrdenada\\porcino_avicola.csv";
+    public static String csvPath = "porcino_avicola.csv";
 
     public static void main(String[] args) throws IOException {
+        RasterService raster = new RasterService(new FilReaderService(), new ImageReaderService());
 
-        IFileReaderService fr = new FilReaderService();
-        RasterService raster = new RasterService(fr, new ImageReaderService());
+        FuncionValor[] capas = raster.getFuncionesValorDeRuta(csvPath);
 
-        capas = raster.getFuncionesValorDeRuta(
-                "C:\\source\\programacion avanzada\\MediaPonderadaOrdenada\\porcino_avicola.csv");
-
-        double[] alphas = new double[] { .5, 1, 1.5 };
+        double[] alphas = new double[] { 0.5, 1.0, 2.0 };
         for (double alpha : alphas) {
-            calcularAptitudEspacial(capas, 1.0, "aptitud_" + alpha + ".tif");
+            String alphaString = Double.toString(alpha).replace('.', '_');
+            calcularAptitudEspacial(capas, 1.0, "aptitud_" + alphaString + ".tif");
         }
     }
 
@@ -45,7 +35,7 @@ public class App {
             for (int y = 0; y < renglones; y++) {
 
                 double[] listaValores = getValores(capas, x, y);
-                double pixOwa = Owa.valorPixel(listaValores, listaPesos, 0.5);
+                double pixOwa = Owa.computePixel(listaValores, listaPesos, 0.5);
 
                 if (Double.isNaN(listaValores[0])) {
                     rasterResultado.setSample(x, y, 0, nulo);
@@ -58,17 +48,17 @@ public class App {
         ImageIO.write(resultado, "tif", new File(fileName));
     }
 
-    public static double[] getPesos(FuncionValor[] capas) {
+    private static double[] getPesos(FuncionValor[] capas) {
         double[] pesos = new double[capas.length];
         int indicePesos = 0;
         for (FuncionValor capa : capas) {
-            pesos[indicePesos] = capa.getPeso();
+            pesos[indicePesos] = capa.getModel().getPeso();
             indicePesos += 1;
         }
         return pesos;
     }
 
-    public static double[] getValores(FuncionValor[] capas, int x, int y) {
+    private static double[] getValores(FuncionValor[] capas, int x, int y) {
         double[] valores = new double[capas.length];
         int indiceValores = 0;
         for (FuncionValor capa : capas) {
