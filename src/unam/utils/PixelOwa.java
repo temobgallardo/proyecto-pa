@@ -1,6 +1,6 @@
-package utils;
+package unam.utils;
 
-public class PixelOwa  {
+public class PixelOwa {
     // TODO: what is thise for?
     public double[] valores;
     public double[] pesos;
@@ -76,8 +76,8 @@ public class PixelOwa  {
             owa_f += oper2[i];
         }
         return owa_f;
-    } 
-    
+    }
+
     public static double valorPixel(double[] valores, double[] pesos, double alpha) {
         /*
          * Utilizamos Bubble sort para ordenar los valores y

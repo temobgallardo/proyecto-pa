@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import unam.utils.PixelOwa;
-import utils.FuncionValor2;
+import unam.utils.FuncionValor2;
 
 /**
  *
