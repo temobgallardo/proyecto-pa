@@ -18,34 +18,40 @@ public class App {
         double[] alphas = new double[] { 0.5, 1.0, 2.0 };
         for (double alpha : alphas) {
             String alphaString = Double.toString(alpha).replace('.', '_');
-            calcularAptitudEspacial(capas, 1.0, "aptitud_" + alphaString + ".tif");
+            calcularAptitudEspacial(capas, alpha, "aptitud_" + alphaString + ".tif");
         }
     }
 
-    private static void calcularAptitudEspacial(FuncionValor[] capas, double alfa, String fileName)
-            throws IOException {
+    private static void calcularAptitudEspacial(FuncionValor[] capas, double alfa, String fileName) throws IOException {
         double[] listaPesos = getPesos(capas);
-        int columnas = capas[0].getColumnas();
-        int renglones = capas[0].getRenglones();
-        double nulo = Double.NaN;
-        BufferedImage resultado = new BufferedImage(columnas, renglones, BufferedImage.TYPE_USHORT_GRAY);
+        BufferedImage resultado = new BufferedImage(capas[0].getColumnas(), capas[0].getRenglones(),
+                BufferedImage.TYPE_USHORT_GRAY);
         WritableRaster rasterResultado = resultado.getRaster();
 
-        for (int x = 0; x < columnas; x++) {
-            for (int y = 0; y < renglones; y++) {
+        setResultedImage(capas, alfa, listaPesos, rasterResultado);
 
-                double[] listaValores = getValores(capas, x, y);
-                double pixOwa = Owa.computePixel(listaValores, listaPesos, 0.5);
+        ImageIO.write(resultado, "tif", new File(fileName));
+    }
 
-                if (Double.isNaN(listaValores[0])) {
-                    rasterResultado.setSample(x, y, 0, nulo);
-                } else {
-                    rasterResultado.setSample(x, y, 0, (pixOwa * 1000));
+    private static void setResultedImage(FuncionValor[] capas, double alfa, double[] listaPesos,
+            WritableRaster rasterResultado) {
+        for (int x = 0; x < capas[0].getColumnas(); x++) {
+            for (int y = 0; y < capas[0].getRenglones(); y++) {
+                for (int banda = 0; banda < capas[0].getBandaDeColor(); banda++) {
+                    double processedPixel = getProcessedPixel(capas, alfa, x, y, banda);
+                    // Double currentResult = Double.isNaN(listaValores[0]) ? Double.NaN : (pixOwa *
+                    // 1000);
+                    rasterResultado.setSample(x, y, banda, processedPixel);
                 }
             }
         }
+    }
 
-        ImageIO.write(resultado, "tif", new File(fileName));
+    private static double getProcessedPixel(FuncionValor[] capas, double alfa, int x, int y,
+            int banda) {
+        double[] listaValores = getPixelsFromFuncionValor(capas, x, y, banda);
+        double processedPixel = Owa.computePixel(listaValores, getPesos(capas), alfa);
+        return processedPixel;
     }
 
     private static double[] getPesos(FuncionValor[] capas) {
@@ -58,11 +64,11 @@ public class App {
         return pesos;
     }
 
-    private static double[] getValores(FuncionValor[] capas, int x, int y) {
+    private static double[] getPixelsFromFuncionValor(FuncionValor[] capas, int x, int y, int banda) {
         double[] valores = new double[capas.length];
         int indiceValores = 0;
         for (FuncionValor capa : capas) {
-            valores[indiceValores] = capa.getPixel(x, y);
+            valores[indiceValores] = capa.getPixel(x, y, banda);
             indiceValores += 1;
         }
         return valores;

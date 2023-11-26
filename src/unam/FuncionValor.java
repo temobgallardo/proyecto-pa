@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 public class FuncionValor {
     private int renglones;
     private int columnas;
+    private int bandaDeColor;
     private Rectangle extension;
     private Raster raster;
     private BufferedImage image;
@@ -32,6 +33,10 @@ public class FuncionValor {
         return columnas;
     }
 
+    public int getBandaDeColor() {
+        return bandaDeColor;
+    }
+
     public Raster getRaster() {
         return raster;
     }
@@ -48,8 +53,8 @@ public class FuncionValor {
         this.model = row;
     }
 
-    public float getPixel(int x, int y) {
-        return this.raster.getSampleFloat(x, y, 0);
+    public float getPixel(int x, int y, int band) {
+        return this.raster.getSampleFloat(x, y, band);
     }
 
     private void initialize() {
@@ -59,6 +64,7 @@ public class FuncionValor {
 
             this.renglones = this.raster.getHeight();
             this.columnas = this.raster.getWidth();
+            this.bandaDeColor = this.raster.getNumBands();
             this.extension = this.raster.getBounds();
         } catch (IOException e) {
             e.printStackTrace();

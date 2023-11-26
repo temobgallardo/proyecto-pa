@@ -39,34 +39,28 @@ public final class Owa {
         }
     }
 
+    /*
+     * Calculamos las sumas para obtener el owa del Pixel
+     * actual
+     */
     private static double computeOnCurrentPixel(double[] valores, double[] pesos, double alpha) {
-        /*
-         * Calculamos las sumas para obtener el owa del Pixel
-         * actual
-         */
         double[] oper1 = new double[pesos.length];
         double[] oper2 = new double[pesos.length];
         double owa_f = 0.0;
 
-        for (int i = 0; i < pesos.length; i++) {
+        // First iteration
+        oper1[0] = pesos[0];
+        oper2[0] = oper1[0];
+        owa_f += oper2[0];
 
-            if (i == 0) {
-                oper1[0] = pesos[0];
-                oper2[0] = oper1[0];
-            } else {
-
-                double suma = 0.0;
-                for (int j = 0; j <= i; j++) {
-                    suma += pesos[j];
-                }
-                oper1[i] = Math.pow(suma, alpha);
-                oper2[i] = (oper1[i] - oper1[i - 1]) * valores[i];
-                /*
-                 * System.out.println(oper1[i]);
-                 * System.out.println(oper2[i]);
-                 */
-
+        for (int i = 1; i < pesos.length; i++) {
+            double suma = 0.0;
+            for (int j = 0; j <= i; j++) {
+                suma += pesos[j];
             }
+            oper1[i] = Math.pow(suma, alpha);
+            oper2[i] = (oper1[i] - oper1[i - 1]) * valores[i];
+
             owa_f += oper2[i];
         }
         return owa_f;
