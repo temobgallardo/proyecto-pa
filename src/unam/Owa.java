@@ -1,7 +1,7 @@
 package unam;
 
 public final class Owa {
-    public static double valorPixel(double[] valores, double[] pesos, double alpha) {
+    public static double computePixel(double[] valores, double[] pesos, double alpha) {
         sort(valores, pesos);
         double owaOnCurrentPixel = computeOnCurrentPixel(valores, pesos, alpha);
         return owaOnCurrentPixel;
