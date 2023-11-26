@@ -26,3 +26,5 @@ replay_pid*
 # lib and bin directories
 lib
 bin
+
+eclipse-formatter.xml

@@ -2,7 +2,6 @@ package unam;
 
 import java.awt.image.BufferedImage;
 
-// TODO: implement this
-public interface IImageReader {
+public interface IImageReaderService {
     public BufferedImage readImage(String filesource);
 }

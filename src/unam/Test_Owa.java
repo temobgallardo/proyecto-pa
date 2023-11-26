@@ -10,7 +10,7 @@ public class Test_Owa {
     /**
      * @param args
      */
-    public static void main(String[] args) {
-        System.out.println(o.valorPixel());
-    }
+    // public static void main(String[] args) {
+    //     System.out.println(o.valorPixel());
+    // }
 }

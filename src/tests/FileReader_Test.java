@@ -12,8 +12,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import unam.FilReader;
-import unam.IFileReader;
+import unam.FilReaderService;
+import unam.IFileReaderService;
 
 @RunWith(Parameterized.class)
 public class FileReader_Test {
@@ -31,7 +31,7 @@ public class FileReader_Test {
     @Test
     public void readFile() {
         String sourcePath = "porcino_avicola.csv";
-        IFileReader sut = new FilReader();
+        IFileReaderService sut = new FilReaderService();
         String csv = null;
 
         try {
@@ -46,7 +46,7 @@ public class FileReader_Test {
     @Test
     public void readFile_throwException() {
         String sourcePath = wrongPath;
-        IFileReader sut = new FilReader();
+        IFileReaderService sut = new FilReaderService();
 
         Assert.assertThrows(Exception.class, () -> sut.readCsv(sourcePath));
     }
@@ -54,7 +54,7 @@ public class FileReader_Test {
     @Test
     public void csvToDictionary() {
         String sourcePath = "porcino_avicola.csv";
-        IFileReader sut = new FilReader();
+        IFileReaderService sut = new FilReaderService();
         HashMap<String, Double> csv = null;
 
         try {
@@ -64,5 +64,21 @@ public class FileReader_Test {
         }
 
         Assert.assertNotNull(csv);
+    }
+
+    @Test
+    public void readCsvRowsString() {
+        String sourcePath = "porcino_avicola.csv";
+        IFileReaderService sut = new FilReaderService();
+        String[] actualResult = new String[] {};
+
+        try {
+            actualResult = sut.getRows(sourcePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertNotNull(actualResult);
+        Assert.assertTrue(actualResult.length == 10);
     }
 }

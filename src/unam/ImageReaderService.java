@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
-public class ImageReader implements IImageReader {
+public class ImageReaderService implements IImageReaderService {
     public BufferedImage readImage(String fileSource) {
         BufferedImage img = null;
         try {

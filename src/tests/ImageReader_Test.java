@@ -7,16 +7,16 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import unam.FilReader;
-import unam.IFileReader;
-import unam.IImageReader;
-import unam.ImageReader;
+import unam.FilReaderService;
+import unam.IFileReaderService;
+import unam.IImageReaderService;
+import unam.ImageReaderService;
 import unam.model.FuncionValor;
 
 public class ImageReader_Test {
     @Test
     public void readImage_test() {
-        IImageReader suv = new ImageReader();
+        IImageReaderService suv = new ImageReaderService();
 
         try {
             java.util.List<FuncionValor> funcionValores = setFuncionDeValores();
@@ -28,7 +28,7 @@ public class ImageReader_Test {
     }
 
     private java.util.List<FuncionValor> setFuncionDeValores() throws IOException {
-        IFileReader fr = new FilReader();
+        IFileReaderService fr = new FilReaderService();
         var datosCsv = fr.getRows("porciono_avicola.csv");
         java.util.List<FuncionValor> funcionValores = java.util.List.of();
 

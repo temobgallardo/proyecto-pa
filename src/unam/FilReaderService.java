@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-public class FilReader implements IFileReader {
+public class FilReaderService implements IFileReaderService {
     public static String NEW_LINE = "\r\n";
 
     @Override

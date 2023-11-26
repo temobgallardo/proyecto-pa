@@ -3,7 +3,7 @@ package unam;
 import java.io.IOException;
 import java.util.HashMap;
 
-public interface IFileReader {
+public interface IFileReaderService {
     public String readCsv(String source) throws IOException;
 
     public HashMap<String, Double> csvToHashMap(String source) throws IOException;
