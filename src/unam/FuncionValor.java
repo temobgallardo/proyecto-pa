@@ -14,11 +14,12 @@ public class FuncionValor {
     private Rectangle extension;
     private Raster raster;
     private BufferedImage image;
-    private FuncionValorModel row;
+    private FuncionValorModel model;
+
     private IImageReaderService imageReaderService;
 
     public FuncionValor(FuncionValorModel rFuncionValorModel, ImageReaderService imageReaderService) {
-        row = rFuncionValorModel;
+        model = rFuncionValorModel;
         this.imageReaderService = imageReaderService;
         initialize();
     }
@@ -39,9 +40,21 @@ public class FuncionValor {
         return extension;
     }
 
+    public FuncionValorModel getModel() {
+        return model;
+    }
+
+    public void setModel(FuncionValorModel row) {
+        this.model = row;
+    }
+
+    public float getPixel(int x, int y) {
+        return this.raster.getSampleFloat(x, y, 0);
+    }
+
     private void initialize() {
         try {
-            this.image = imageReaderService.readImage(row.getRuta());
+            this.image = imageReaderService.readImage(model.getRuta());
             this.raster = this.image.getData();
 
             this.renglones = this.raster.getHeight();
@@ -51,9 +64,4 @@ public class FuncionValor {
             e.printStackTrace();
         }
     }
-
-    public float getPixel(int x, int y) {
-        return this.raster.getSampleFloat(x, y, 0);
-    }
-
 }
