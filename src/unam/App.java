@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import unam.utils.PixelOwa;
 import utils.FuncionValor2;
-import utils.PixelOwa;
 
 /**
  *
@@ -88,7 +88,7 @@ public class App {
         double[] pesos = new double[capas.length];
         int indicePesos = 0;
         for (FuncionValor2 capa : capas) {
-            pesos[indicePesos] = capa.getW();
+            pesos[indicePesos] = capa.getPeso();
             indicePesos += 1;
         }
         return pesos;
@@ -98,7 +98,7 @@ public class App {
         double[] valores = new double[capas.length];
         int indiceValores = 0;
         for (FuncionValor2 capa : capas) {
-            valores[indiceValores] = capa.iPixel(x, y);
+            valores[indiceValores] = capa.getPixel(x, y);
             indiceValores += 1;
         }
         return valores;

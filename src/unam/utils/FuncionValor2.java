@@ -1,14 +1,4 @@
-package utils;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author victor
- */
+package unam.utils;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -19,8 +9,8 @@ import java.awt.Rectangle;
 
 public class FuncionValor2 {
     private String nombre;
-    private double w;
-    private String rPath;
+    private double peso;
+    private String filePath;
     private int renglones;
     private int columnas;
     private Rectangle extension;
@@ -37,17 +27,17 @@ public class FuncionValor2 {
 
     public FuncionValor2(String nombre, double w, String rPath) {
         this.nombre = nombre;
-        this.w = w;
-        this.rPath = rPath;
-        abrirRaster(this.rPath);
+        this.peso = w;
+        this.filePath = rPath;
+        abrirRaster(this.filePath);
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public double getW() {
-        return w;
+    public double getPeso() {
+        return peso;
     }
 
     public Raster getRaster() {
@@ -73,7 +63,7 @@ public class FuncionValor2 {
 
     }
 
-    public float iPixel(int x, int y) {
+    public float getPixel(int x, int y) {
 
         return this.raster.getSampleFloat(x, y, 0);
     }
