@@ -1,6 +1,7 @@
 package unam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import unam.model.FuncionValorModel;
@@ -17,16 +18,20 @@ public class RasterService implements IRasterService {
 
     @Override
     public FuncionValor[] getFuncionesValorDeRuta(String ruta) throws IOException {
+        if (ruta == null || ruta.trim().isEmpty()) {
+            throw new IllegalArgumentException(ruta);
+        }
+
         var datosCsv = fileReader.getRows(ruta);
-        funcionValores = List.of();
-        List<FuncionValorModel> otherFuncionesValor = List.of();
+        List<FuncionValor> funcionValores = new ArrayList<>();
 
         for (String lineaCsv : datosCsv) {
             var row = lineaCsv.split(",");
-            funcionValores.add(new FuncionValorModel(row[0], Double.parseDouble(row[1]), row[2]));
-            otherFuncionesValor.add(new FuncionValorModel(row[0], Double.parseDouble(row[1]), row[2]));
+            FuncionValorModel model = new FuncionValorModel(row[0], Double.parseDouble(row[2]), row[1]);
+            FuncionValor currentFuncionValor = new FuncionValor(model, (ImageReaderService) imageReader);
+            funcionValores.add(currentFuncionValor);
         }
 
-        return (FuncionValor[]) otherFuncionesValor.toArray();
+        return funcionValores.toArray(new FuncionValor[0]);
     }
 }
