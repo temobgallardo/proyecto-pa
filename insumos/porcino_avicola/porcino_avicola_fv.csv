@@ -1,0 +1,11 @@
+nombre,ruta,w
+Cobertura - Biofísicos,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_bio_usv_cobertura_usv_svi_16cats_costa_manglar.tif,0.046411428
+Profundidad del acuífero - Biofísicos,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_bio_agua_d_manto_freatico.tif,0.232140714
+Urbanas - Mano de obra,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_socio_loca_d_localidades_15k_exc.tif,0.01156958
+Rurales - Urbano - Mano de obra,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_socio_loca_d_localidades_2500_15k_exc.tif,0.05285302
+Rurales - Mano de obra,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_socio_loca_d_localidades_2500_exc.tif,0.03016794
+Carreteras - Infraestructura,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_infra_cam_d_carretera_prolongacion.tif,0.26526176
+Caminos y veredas - Infraestructura,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_infra_cam_d_caminos_veredas.tif,0.06631544
+Distancia a rastro y empacadoras - Infraestructura,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_infra_tif_d_rastros_porcinos_avicolas.tif,0.08747620800000000
+Distancia a redes eléctricas - Infraestructura,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_infra_elec_d_lineas_electricas.tif,0.16102492
+Puerto Progreso - Infraestructura,/Users/victor/Downloads/funciones_valor/porcino_avicola/fv_por_infra_puer_d_puerto_progreso_con_carreteras.tif,0.046941052000000000
