@@ -27,6 +27,12 @@ public class Manager {
             this.poolWorkers[x]=new Thread(new Worker(capas,alpha,x,rasterResultado));
             this.poolWorkers[x].start();
         }
+        for(int x=0;x<filas;x++){
+            try {
+                this.poolWorkers[x].join();
+            } catch (InterruptedException e) {
+            }
+        }
         
         File pathRasterTif = new File(pathSalida+BaseDatos.fechaFormat());
         if (pathRasterTif.exists()) {
